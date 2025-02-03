@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #00b894;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://via.placeholder.com/1500x600') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 100px 20px 200px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #2d3436;
+        }
+
+        /* About Section */
+        .about {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .about img {
+            width: 250px;
+            border-radius: 10px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        /* Skills */
+        .skills {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            background-color: #00cec9;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px;
+            width: 150px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+        }
+
+        /* Projects */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .project-card h3 {
+            margin: 15px 0;
+        }
+
+        /* Contact */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            background-color: #0984e3;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #74b9ff;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                display: none;
+                background-color: #444;
+                position: absolute;
+                right: 20px;
+                top: 60px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            nav ul.show {
+                display: block;
+            }
+
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+                font-size: 24px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">My Portfolio</div>
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <ul id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Hi, I'm John Doe</h1>
+        <p>Web Developer | Designer | Tech Enthusiast</p>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about">
+            <img src="https://via.placeholder.com/250" alt="Profile Picture">
+            <div class="about-text">
+                <p>I'm a passionate web developer with experience in creating modern and responsive websites. My background in computer science has helped me build dynamic, user-friendly web applications.</p>
+                <p><strong>Education:</strong> B.Sc. in Computer Science</p>
+                <p><strong>Experience:</strong> 3+ years in front-end and back-end development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section>
+        <h2>Skills</h2>
+        <div class="skills">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects">
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x200" alt="Project 1">
+                <h3>Project One</h3>
+                <p>A web application built using React and Node.js.</p>
+            </div>
+            <div class="project-card">
+                <img src="https://via.placeholder.com/300x200" alt="Project 2">
+                <h3>Project Two</h3>
+                <p>A responsive portfolio website designed with modern CSS techniques.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 John Doe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle Menu for Mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+
+        // Close Menu on Link Click (Mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
