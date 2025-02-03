@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .weather-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            color: #00796b;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        #weatherInfo {
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Weather App</h1>
+        <input type="text" id="cityInput" placeholder="Enter city name">
+        <button id="getWeatherBtn">Get Weather</button>
+        <button id="currentLocationBtn">Use My Location</button>
+        
+        <div id="weatherInfo" class="hidden">
+            <h2 id="cityName"></h2>
+            <p id="description"></p>
+            <p id="temperature"></p>
+            <p id="humidity"></p>
+            <p id="wind"></p>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
+        const weatherInfo = document.getElementById('weatherInfo');
+        const cityNameEl = document.getElementById('cityName');
+        const descriptionEl = document.getElementById('description');
+        const temperatureEl = document.getElementById('temperature');
+        const humidityEl = document.getElementById('humidity');
+        const windEl = document.getElementById('wind');
+
+        document.getElementById('getWeatherBtn').addEventListener('click', () => {
+            const city = document.getElementById('cityInput').value;
+            if (city) {
+                fetchWeatherByCity(city);
+            } else {
+                alert('Please enter a city name!');
+            }
+        });
+
+        document.getElementById('currentLocationBtn').addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    fetchWeatherByCoords(lat, lon);
+                }, () => {
+                    alert('Unable to retrieve your location.');
+                });
+            } else {
+                alert('Geolocation is not supported by your browser.');
+            }
+        });
+
+        function fetchWeatherByCity(city) {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            fetchWeather(apiUrl);
+        }
+
+        function fetchWeatherByCoords(lat, lon) {
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+            fetchWeather(apiUrl);
+        }
+
+        function fetchWeather(apiUrl) {
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('City not found');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayWeather(data);
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        }
+
+        function displayWeather(data) {
+            cityNameEl.textContent = `Weather in ${data.name}`;
+            descriptionEl.textContent = `Condition: ${data.weather[0].description}`;
+            temperatureEl.textContent = `Temperature: ${data.main.temp}°C`;
+            humidityEl.textContent = `Humidity: ${data.main.humidity}%`;
+            windEl.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+            weatherInfo.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
